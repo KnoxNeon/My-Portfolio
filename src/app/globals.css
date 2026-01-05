@@ -1,26 +1,139 @@
 @import "tailwindcss";
 
+@theme {
+  --font-family-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-family-display: var(--font-oswald), ui-sans-serif, system-ui, sans-serif;
+  
+  --color-primary: #FFD028;
+  --color-primary-foreground: #000000;
+  
+  --radius: 0.5rem;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #000000;
+  --foreground: #ffffff;
+  --card: #111111;
+  --card-foreground: #ffffff;
+  --popover: #111111;
+  --popover-foreground: #ffffff;
+  --primary: #FFD028;
+  --primary-foreground: #000000;
+  --secondary: #1a1a1a;
+  --secondary-foreground: #ffffff;
+  --muted: #1a1a1a;
+  --muted-foreground: #a1a1aa;
+  --accent: #1a1a1a;
+  --accent-foreground: #ffffff;
+  --destructive: #ef4444;
+  --border: #27272a;
+  --input: #27272a;
+  --ring: #FFD028;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+.dark {
+  --background: #000000;
+  --foreground: #ffffff;
+  --card: #0a0a0a;
+  --card-foreground: #ffffff;
+  --popover: #0a0a0a;
+  --popover-foreground: #ffffff;
+  --primary: #FFD028;
+  --primary-foreground: #000000;
+  --secondary: #0f0f0f;
+  --secondary-foreground: #ffffff;
+  --muted: #0f0f0f;
+  --muted-foreground: #a1a1aa;
+  --accent: #0f0f0f;
+  --accent-foreground: #ffffff;
+  --destructive: #7f1d1d;
+  --border: #1a1a1a;
+  --input: #1a1a1a;
+  --ring: #FFD028;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  border-color: hsl(var(--border));
 }
 
 body {
-  background: var(--background);
+  color: hsl(var(--foreground));
+  background: hsl(var(--background));
+  font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  min-height: 100vh;
+}
+
+.dot-pattern {
+  background-image: radial-gradient(#333333 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.dark .dot-pattern {
+  background-image: radial-gradient(#222222 1px, transparent 1px);
+}
+
+.font-display {
+  font-family: var(--font-oswald), ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Custom utility classes */
+.bg-background {
+  background-color: var(--background);
+}
+
+.text-foreground {
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+}
+
+.bg-card {
+  background-color: var(--card);
+}
+
+.text-card-foreground {
+  color: var(--card-foreground);
+}
+
+.text-muted-foreground {
+  color: var(--muted-foreground);
+}
+
+.bg-muted {
+  background-color: var(--muted);
+}
+
+.border-border {
+  border-color: var(--border);
+}
+.line-clamp-3 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+/* Ensure form inputs are interactive */
+input[type="text"],
+input[type="email"],
+textarea {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: var(--input);
+  color: var(--foreground);
+  border: 1px solid var(--border);
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+textarea:focus {
+  outline: none;
+  border-color: #FFD028;
+  box-shadow: 0 0 0 2px rgba(255, 208, 40, 0.2);
+}
+
+/* Ensure inputs are not being blocked by other elements */
+.contact-form input,
+.contact-form textarea {
+  position: relative;
+  z-index: 10;
+  pointer-events: auto;
 }
