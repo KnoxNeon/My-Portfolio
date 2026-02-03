@@ -2,6 +2,7 @@
 
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import LazyItem from '@/components/LazyItem';
 
 export default function ProjectsSection() {
   const projects = [
@@ -102,51 +103,58 @@ export default function ProjectsSection() {
         {/* Featured Projects Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
           {projects.filter(project => project.featured).map((project, index) => (
-            <Card key={index} className="group overflow-hidden bg-card border border-border hover:border-[#FFD028]/50 transition-all duration-300">
-              <div className="relative overflow-hidden">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <div className="absolute bottom-4 left-4 right-4 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 opacity-0 group-hover:opacity-100">
-                  <div className="flex gap-3">
-                    <Button
-                      size="sm"
-                      className="bg-[#FFD028] hover:bg-yellow-400 text-black font-semibold"
-                      onClick={() => window.open(project.liveUrl, '_blank')}
-                    >
-                      <span className="material-icons text-sm mr-1">launch</span>
-                      Live Demo
-                    </Button>
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      className="border-white text-white hover:bg-white hover:text-black"
-                      onClick={() => window.open(project.githubUrl, '_blank')}
-                    >
-                      <span className="material-icons text-sm mr-1">code</span>
-                      Code
-                    </Button>
+            <LazyItem 
+              key={index} 
+              animationType="scale" 
+              delay={index * 0.2}
+              className="h-full"
+            >
+              <Card className="group overflow-hidden bg-card border border-border hover:border-[#FFD028]/50 transition-all duration-300 h-full">
+                <div className="relative overflow-hidden">
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute bottom-4 left-4 right-4 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 opacity-0 group-hover:opacity-100">
+                    <div className="flex gap-3">
+                      <Button
+                        size="sm"
+                        className="bg-[#FFD028] hover:bg-yellow-400 text-black font-semibold"
+                        onClick={() => window.open(project.liveUrl, '_blank')}
+                      >
+                        <span className="material-icons text-sm mr-1">launch</span>
+                        Live Demo
+                      </Button>
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        className="border-white text-white hover:bg-white hover:text-black"
+                        onClick={() => window.open(project.githubUrl, '_blank')}
+                      >
+                        <span className="material-icons text-sm mr-1">code</span>
+                        Code
+                      </Button>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div className="p-6">
-                <h3 className="text-xl font-bold text-foreground mb-3">{project.title}</h3>
-                <p className="text-muted-foreground mb-4 leading-relaxed">{project.description}</p>
-                <div className="flex flex-wrap gap-2">
-                  {project.technologies.map((tech, techIndex) => (
-                    <span
-                      key={techIndex}
-                      className={`px-3 py-1 text-xs font-semibold rounded-full ${getTechColor(tech)}`}
-                    >
-                      {tech}
-                    </span>
-                  ))}
+                <div className="p-6">
+                  <h3 className="text-xl font-bold text-foreground mb-3">{project.title}</h3>
+                  <p className="text-muted-foreground mb-4 leading-relaxed">{project.description}</p>
+                  <div className="flex flex-wrap gap-2">
+                    {project.technologies.map((tech, techIndex) => (
+                      <span
+                        key={techIndex}
+                        className={`px-3 py-1 text-xs font-semibold rounded-full ${getTechColor(tech)}`}
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            </Card>
+              </Card>
+            </LazyItem>
           ))}
         </div>
 

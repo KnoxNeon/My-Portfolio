@@ -11,6 +11,7 @@ import ProjectsSection from '@/components/ProjectsSection';
 import ContactSection from '@/components/ContactSection';
 import SocialSidebar from '@/components/SocialSidebar';
 import Footer from '@/components/Footer';
+import LazySection from '@/components/LazySection';
 import { ThemeProvider, useTheme } from '@/components/ThemeProvider';
 
 function PortfolioContent() {
@@ -25,11 +26,26 @@ function PortfolioContent() {
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#FFD028]/10 rounded-full blur-[120px] pointer-events-none -translate-y-1/2 translate-x-1/2 z-0" />
         
         <HeroSection />
-        <AboutSection />
-        <JourneySection />
-        <SkillsSection />
-        <ProjectsSection />
-        <ContactSection />
+        
+        <LazySection animationType="fadeUp" delay={0.1}>
+          <AboutSection />
+        </LazySection>
+        
+        <LazySection animationType="slideLeft" delay={0.2}>
+          <JourneySection />
+        </LazySection>
+        
+        <LazySection animationType="fadeUp" delay={0.1}>
+          <SkillsSection />
+        </LazySection>
+        
+        <LazySection animationType="slideRight" delay={0.2}>
+          <ProjectsSection />
+        </LazySection>
+        
+        <LazySection animationType="scale" delay={0.1}>
+          <ContactSection />
+        </LazySection>
       </main>
       
       <Footer />

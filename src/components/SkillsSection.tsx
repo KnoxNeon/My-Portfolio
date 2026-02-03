@@ -2,6 +2,7 @@
 
 import { Card } from '@/components/ui/card';
 import { useEffect, useState } from 'react';
+import LazyItem from '@/components/LazyItem';
 
 export default function SkillsSection() {
   const [isVisible, setIsVisible] = useState(false);
@@ -146,119 +147,128 @@ export default function SkillsSection() {
 
       <div className="w-full max-w-7xl mx-auto space-y-12">
         {skillCategories.map((category, categoryIndex) => (
-          <Card 
+          <LazyItem 
             key={categoryIndex}
-            className="bg-card border border-border rounded-2xl p-8 shadow-lg hover:border-[#FFD028]/50 transition-colors"
+            animationType="fadeUp"
+            delay={categoryIndex * 0.2}
           >
-            <div className="flex items-center gap-4 mb-8">
-              <div className="w-12 h-12 rounded-lg bg-[#FFD028]/10 flex items-center justify-center text-[#FFD028]">
-                {renderCategoryIcon(category.icon)}
-              </div>
-              <h3 className="text-2xl font-bold text-foreground">{category.title}</h3>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {category.skills.map((skill, skillIndex) => (
-                <div key={skillIndex} className="space-y-3">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <div className="text-[#FFD028]">
-                        {renderTechIcon(skill.icon)}
-                      </div>
-                      <span className="font-semibold text-foreground">{skill.name}</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className="text-sm font-medium text-muted-foreground">
-                        {getSkillLevel(skill.level)}
-                      </span>
-                      <span className="text-sm font-bold text-[#FFD028]">{skill.level}%</span>
-                    </div>
-                  </div>
-                  
-                  {/* Progress Bar */}
-                  <div className="relative h-3 bg-muted rounded-full overflow-hidden">
-                    <div 
-                      className={`absolute top-0 left-0 h-full bg-gradient-to-r ${skill.color} rounded-full transition-all duration-1000 ease-out`}
-                      style={{ 
-                        width: isVisible ? `${skill.level}%` : '0%',
-                        transitionDelay: `${categoryIndex * 200 + skillIndex * 100}ms`
-                      }}
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-pulse" />
-                  </div>
-                  
-                  {/* Skill Level Indicator */}
-                  <div className="flex justify-between text-xs text-muted-foreground">
-                    <span>Beginner</span>
-                    <span>Intermediate</span>
-                    <span>Advanced</span>
-                    <span>Expert</span>
-                  </div>
+            <Card 
+              className="bg-card border border-border rounded-2xl p-8 shadow-lg hover:border-[#FFD028]/50 transition-colors"
+            >
+              <div className="flex items-center gap-4 mb-8">
+                <div className="w-12 h-12 rounded-lg bg-[#FFD028]/10 flex items-center justify-center text-[#FFD028]">
+                  {renderCategoryIcon(category.icon)}
                 </div>
-              ))}
-            </div>
-          </Card>
+                <h3 className="text-2xl font-bold text-foreground">{category.title}</h3>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {category.skills.map((skill, skillIndex) => (
+                  <div key={skillIndex} className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <div className="text-[#FFD028]">
+                          {renderTechIcon(skill.icon)}
+                        </div>
+                        <span className="font-semibold text-foreground">{skill.name}</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <span className="text-sm font-medium text-muted-foreground">
+                          {getSkillLevel(skill.level)}
+                        </span>
+                        <span className="text-sm font-bold text-[#FFD028]">{skill.level}%</span>
+                      </div>
+                    </div>
+                    
+                    {/* Progress Bar */}
+                    <div className="relative h-3 bg-muted rounded-full overflow-hidden">
+                      <div 
+                        className={`absolute top-0 left-0 h-full bg-gradient-to-r ${skill.color} rounded-full transition-all duration-1000 ease-out`}
+                        style={{ 
+                          width: isVisible ? `${skill.level}%` : '0%',
+                          transitionDelay: `${categoryIndex * 200 + skillIndex * 100}ms`
+                        }}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-pulse" />
+                    </div>
+                    
+                    {/* Skill Level Indicator */}
+                    <div className="flex justify-between text-xs text-muted-foreground">
+                      <span>Beginner</span>
+                      <span>Intermediate</span>
+                      <span>Advanced</span>
+                      <span>Expert</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </Card>
+          </LazyItem>
         ))}
       </div>
 
       {/* Educational Qualification */}
-      <div className="w-full max-w-7xl mx-auto mt-16">
-        <Card className="bg-card border border-border rounded-2xl p-8 shadow-lg hover:border-[#FFD028]/50 transition-colors">
-          <div className="flex items-center gap-4 mb-8">
-            <div className="w-12 h-12 rounded-lg bg-[#FFD028]/10 flex items-center justify-center text-[#FFD028]">
-              <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M5,13.18V17.18L12,21L19,17.18V13.18L12,17L5,13.18M12,3L1,9L12,15L21,10.09V17H23V9L12,3Z"/>
-              </svg>
-            </div>
-            <h3 className="text-2xl font-bold text-foreground">Educational Qualification</h3>
-          </div>
-          
-          <div className="bg-gradient-to-r from-[#FFD028]/5 to-transparent rounded-xl p-6 border border-[#FFD028]/20">
-            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-              <div>
-                <h4 className="text-xl font-semibold text-foreground mb-2">
-                  Bachelor of Science in Mechatronics Engineering
-                </h4>
-                <p className="text-lg text-[#FFD028] font-medium mb-1">
-                  Rajshahi University of Engineering & Technology (RUET)
-                </p>
-                <p className="text-muted-foreground">
-                  Specialized in the integration of mechanical, electrical, and computer engineering
-                </p>
+      <LazyItem animationType="slideLeft" delay={0.3}>
+        <div className="w-full max-w-7xl mx-auto mt-16">
+          <Card className="bg-card border border-border rounded-2xl p-8 shadow-lg hover:border-[#FFD028]/50 transition-colors">
+            <div className="flex items-center gap-4 mb-8">
+              <div className="w-12 h-12 rounded-lg bg-[#FFD028]/10 flex items-center justify-center text-[#FFD028]">
+                <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M5,13.18V17.18L12,21L19,17.18V13.18L12,17L5,13.18M12,3L1,9L12,15L21,10.09V17H23V9L12,3Z"/>
+                </svg>
               </div>
-              <div className="text-right">
-                <div className="text-2xl font-bold text-[#FFD028] mb-1">2019 - 2024</div>
-                <div className="text-sm text-muted-foreground">5 Years Program</div>
+              <h3 className="text-2xl font-bold text-foreground">Educational Qualification</h3>
+            </div>
+            
+            <div className="bg-gradient-to-r from-[#FFD028]/5 to-transparent rounded-xl p-6 border border-[#FFD028]/20">
+              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <div>
+                  <h4 className="text-xl font-semibold text-foreground mb-2">
+                    Bachelor of Science in Mechatronics Engineering
+                  </h4>
+                  <p className="text-lg text-[#FFD028] font-medium mb-1">
+                    Rajshahi University of Engineering & Technology (RUET)
+                  </p>
+                  <p className="text-muted-foreground">
+                    Specialized in the integration of mechanical, electrical, and computer engineering
+                  </p>
+                </div>
+                <div className="text-right">
+                  <div className="text-2xl font-bold text-[#FFD028] mb-1">2019 - 2024</div>
+                  <div className="text-sm text-muted-foreground">5 Years Program</div>
+                </div>
               </div>
             </div>
-          </div>
-        </Card>
-      </div>
+          </Card>
+        </div>
+      </LazyItem>
 
       {/* Overall Stats */}
-      <div className="w-full max-w-7xl mx-auto mt-16">
-        <Card className="bg-gradient-to-br from-[#FFD028]/5 to-transparent border border-[#FFD028]/20 rounded-2xl p-8">
-          <h3 className="text-2xl font-bold text-foreground mb-6 text-center">Skill Summary</h3>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            <div className="text-center">
-              <div className="text-3xl font-bold text-[#FFD028] mb-2">20+</div>
-              <div className="text-sm text-muted-foreground">Technologies</div>
+      <LazyItem animationType="scale" delay={0.4}>
+        <div className="w-full max-w-7xl mx-auto mt-16">
+          <Card className="bg-gradient-to-br from-[#FFD028]/5 to-transparent border border-[#FFD028]/20 rounded-2xl p-8">
+            <h3 className="text-2xl font-bold text-foreground mb-6 text-center">Skill Summary</h3>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+              <div className="text-center">
+                <div className="text-3xl font-bold text-[#FFD028] mb-2">20+</div>
+                <div className="text-sm text-muted-foreground">Technologies</div>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl font-bold text-[#FFD028] mb-2">4+</div>
+                <div className="text-sm text-muted-foreground">Years Experience</div>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl font-bold text-[#FFD028] mb-2">85%</div>
+                <div className="text-sm text-muted-foreground">Avg. Proficiency</div>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl font-bold text-[#FFD028] mb-2">12</div>
+                <div className="text-sm text-muted-foreground">Certifications</div>
+              </div>
             </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-[#FFD028] mb-2">4+</div>
-              <div className="text-sm text-muted-foreground">Years Experience</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-[#FFD028] mb-2">85%</div>
-              <div className="text-sm text-muted-foreground">Avg. Proficiency</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-[#FFD028] mb-2">12</div>
-              <div className="text-sm text-muted-foreground">Certifications</div>
-            </div>
-          </div>
-        </Card>
-      </div>
+          </Card>
+        </div>
+      </LazyItem>
     </section>
   );
 }
