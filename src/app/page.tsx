@@ -50,18 +50,16 @@ function PortfolioContent() {
       
       <Footer />
 
-      {/* Double click to toggle dark mode - exclude contact form */}
+      {/* Double click to toggle dark mode - only active on empty areas */}
       <div 
-        className="fixed inset-0 z-0 pointer-events-none"
+        className="fixed inset-0 pointer-events-none"
+        style={{ zIndex: -1 }}
         onDoubleClick={(e) => {
-          // Don't toggle if clicking on form elements
           const target = e.target as HTMLElement;
-          if (target.closest('.contact-form') || target.closest('input') || target.closest('textarea')) {
-            return;
+          if (target === e.currentTarget) {
+            toggleTheme();
           }
-          toggleTheme();
         }}
-        style={{ pointerEvents: 'auto' }}
       />
     </div>
   );

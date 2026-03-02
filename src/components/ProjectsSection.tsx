@@ -11,8 +11,9 @@ export default function ProjectsSection() {
       description: 'A full-stack e-commerce solution with React frontend, Node.js backend, and MongoDB database. Features include user authentication, payment integration, and admin dashboard.',
       image: 'https://i.ibb.co/CpcxP9BC/image.png',
       technologies: ['React', 'Node.js', 'Tailwind', 'Firebase', 'MongoDB', 'Express', 'Stripe'],
-      liveUrl: 'https://hemio-knox.surge.sh',
-      githubUrl: 'https://github.com/davidmichel/ecommerce-platform',
+      liveUrl: 'https://hemio-knox.surge.sh/',
+      clientRepo: 'https://github.com/KnoxNeon/Hemio_Client',
+      serverRepo: 'https://github.com/KnoxNeon/Hemio_Server',
       featured: true
     },
     {
@@ -20,45 +21,20 @@ export default function ProjectsSection() {
       description: 'PawMart is a modern, responsive web application that allows users to buy, sell, and explore pet items, including pet food, accessories, toys, and more—all in one convenient platform.',
       image: 'https://i.ibb.co/3Yd0cVN2/image.png',
       technologies: ['React', 'Node.js', 'Tailwind', 'Firebase', 'MongoDB', 'Express'],
-      liveUrl: 'https://pawmart-knox.surge.sh',
-      githubUrl: 'https://github.com/davidmichel/task-manager',
+      liveUrl: 'https://pawmart-knox.surge.sh/',
+      clientRepo: 'https://github.com/KnoxNeon/PawMart_Client',
+      serverRepo: 'https://github.com/KnoxNeon/PawMart_Server',
       featured: true
-    },
-    {
-      title: 'Weather Dashboard',
-      description: 'A responsive weather application with location-based forecasts, interactive maps, and weather alerts. Built with React and integrated with multiple weather APIs.',
-      image: 'https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?w=500&h=300&fit=crop',
-      technologies: ['React', 'TypeScript', 'Chart.js', 'OpenWeather API'],
-      liveUrl: 'https://weather-dashboard-demo.com',
-      githubUrl: 'https://github.com/davidmichel/weather-dashboard',
-      featured: false
-    },
-    {
-      title: 'Social Media Analytics',
-      description: 'A comprehensive analytics dashboard for social media metrics. Features data visualization, automated reporting, and multi-platform integration.',
-      image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=500&h=300&fit=crop',
-      technologies: ['Vue.js', 'D3.js', 'Firebase', 'Node.js'],
-      liveUrl: 'https://analytics-demo.com',
-      githubUrl: 'https://github.com/davidmichel/social-analytics',
-      featured: false
     },
     {
       title: 'GameHub | Free PC Games Download Platform',
       description: 'GameHub is a modern, responsive web application that lets users discover, explore, and download the most popular free-to-play and premium PC games in one beautiful place',
       image: 'https://i.ibb.co/zTkt4kJN/image.png',
-      technologies: ['React', 'Node.js', 'Tailwind', 'Firebase'],
-      liveUrl: 'https://gamehub-knox.surge.sh',
-      githubUrl: 'https://github.com/davidmichel/real-estate-platform',
+      technologies: ['React', 'Tailwind', 'Firebase'],
+      liveUrl: 'https://gamehub-knox.surge.sh/',
+      clientRepo: 'https://github.com/KnoxNeon/GameHub',
+      serverRepo: null,
       featured: true
-    },
-    {
-      title: 'Learning Management System',
-      description: 'An educational platform with course management, video streaming, progress tracking, and interactive quizzes. Supports multiple user roles.',
-      image: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=500&h=300&fit=crop',
-      technologies: ['Next.js', 'PostgreSQL', 'AWS S3', 'Stripe', 'WebRTC'],
-      liveUrl: 'https://lms-demo.com',
-      githubUrl: 'https://github.com/davidmichel/learning-management',
-      featured: false
     }
   ];
 
@@ -117,32 +93,13 @@ export default function ProjectsSection() {
                     className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  <div className="absolute bottom-4 left-4 right-4 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 opacity-0 group-hover:opacity-100">
-                    <div className="flex gap-3">
-                      <Button
-                        size="sm"
-                        className="bg-[#FFD028] hover:bg-yellow-400 text-black font-semibold"
-                        onClick={() => window.open(project.liveUrl, '_blank')}
-                      >
-                        <span className="material-icons text-sm mr-1">launch</span>
-                        Live Demo
-                      </Button>
-                      <Button
-                        size="sm"
-                        variant="outline"
-                        className="border-white text-white hover:bg-white hover:text-black"
-                        onClick={() => window.open(project.githubUrl, '_blank')}
-                      >
-                        <span className="material-icons text-sm mr-1">code</span>
-                        Code
-                      </Button>
-                    </div>
-                  </div>
                 </div>
                 <div className="p-6">
                   <h3 className="text-xl font-bold text-foreground mb-3">{project.title}</h3>
                   <p className="text-muted-foreground mb-4 leading-relaxed">{project.description}</p>
-                  <div className="flex flex-wrap gap-2">
+                  
+                  {/* Technology Tags */}
+                  <div className="flex flex-wrap gap-2 mb-4">
                     {project.technologies.map((tech, techIndex) => (
                       <span
                         key={techIndex}
@@ -151,6 +108,38 @@ export default function ProjectsSection() {
                         {tech}
                       </span>
                     ))}
+                  </div>
+
+                  {/* Action Buttons */}
+                  <div className="flex flex-wrap gap-2 pt-4 border-t border-border">
+                    <Button
+                      size="sm"
+                      className="bg-[#FFD028] text-black font-semibold hover:bg-[#FFD028] hover:text-black transition-transform hover:scale-105"
+                      onClick={() => window.open(project.liveUrl, '_blank')}
+                    >
+                      <span className="material-icons text-sm mr-1">launch</span>
+                      Live Demo
+                    </Button>
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      className="border-border hover:border-border transition-transform hover:scale-105"
+                      onClick={() => window.open(project.clientRepo, '_blank')}
+                    >
+                      <span className="material-icons text-sm mr-1">code</span>
+                      Client Repo
+                    </Button>
+                    {project.serverRepo && (
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        className="border-border hover:border-border transition-transform hover:scale-105"
+                        onClick={() => window.open(project.serverRepo, '_blank')}
+                      >
+                        <span className="material-icons text-sm mr-1">storage</span>
+                        Server Repo
+                      </Button>
+                    )}
                   </div>
                 </div>
               </Card>
@@ -224,7 +213,7 @@ export default function ProjectsSection() {
           </p>
           <Button 
             size="lg"
-            className="bg-[#FFD028] hover:bg-yellow-400 text-black font-bold px-8 py-3"
+            className="bg-[#FFD028] text-black font-bold px-8 py-3 hover:bg-[#FFD028] hover:text-black transition-transform hover:scale-105"
             onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
           >
             <span className="material-icons mr-2">email</span>

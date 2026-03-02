@@ -20,9 +20,9 @@ export default function HeroSection() {
         </div>
 
         <div className="mt-8 flex flex-wrap justify-between gap-4 md:gap-0 border-t border-border pt-8 text-sm md:text-base font-semibold tracking-widest text-muted-foreground uppercase">
-          <span className="w-1/2 md:w-auto text-center md:text-left">#FRONTEND</span>
+          <span className="w-1/3 md:w-auto text-center md:text-left">#FRONTEND</span>
           <span className="w-1/2 md:w-auto text-center md:text-left">#BACKEND</span>
-          <span className="w-1/2 md:w-auto text-center md:text-left">#FULL-STACK</span>
+          <span className="w-1/3 md:w-auto text-center md:text-left">#FULL-STACK</span>
           <span className="w-1/2 md:w-auto text-center md:text-left">#MERN-STACK</span>
         </div>
       </div>
@@ -30,13 +30,13 @@ export default function HeroSection() {
       <div className="w-full max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-end">
         <div className="relative flex justify-center md:justify-start">
           <div className="absolute inset-0 -z-10 w-full h-full translate-x-4 translate-y-4 md:translate-x-8 md:translate-y-8 dot-pattern opacity-30" />
-          <div className="relative w-full max-w-sm aspect-[4/5] rounded-xl overflow-hidden bg-muted shadow-2xl">
+          <div className="relative w-full max-w-sm aspect-3.5/4 rounded-xl overflow-hidden bg-muted shadow-2xl">
             <Image
               alt="Iftekharul Alam Portrait"
-              className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
-              src="https://i.ibb.co/mCj86JyS/profile-image.png"
+              className="w-full h-120 object-cover grayscale hover:grayscale-0 transition-all duration-500"
+              src="../me.jpg"
               width={400}
-              height={500}
+              height={400}
             />
           </div>
         </div>

@@ -62,26 +62,41 @@ export default function ContactSection() {
     setIsSubmitting(true);
     
     try {
-      // Simulate form submission with a loading toast
       const loadingToast = toast.loading('Sending your message...');
       
-      // Simulate API call delay
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      // Dismiss loading toast
+      // Send email using Formspree
+      const response = await fetch('https://formspree.io/f/xnjbkpko', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+          _replyto: formData.email,
+          _subject: `Portfolio Contact: ${formData.subject}`
+        })
+      });
+
       toast.dismiss(loadingToast);
       
-      // Show success toast
-      toast.success('Message sent successfully! I\'ll get back to you soon.', {
-        duration: 5000,
-        icon: '✅',
-      });
-      
-      // Reset form
-      setFormData({ name: '', email: '', subject: '', message: '' });
+      if (response.ok) {
+        toast.success('Message sent successfully! I\'ll get back to you soon.', {
+          duration: 5000,
+          icon: '✅',
+        });
+        
+        // Reset form
+        setFormData({ name: '', email: '', subject: '', message: '' });
+      } else {
+        throw new Error('Failed to send message');
+      }
       
     } catch (error) {
-      toast.error('Failed to send message. Please try again or contact me directly.');
+      console.error('Error sending message:', error);
+      toast.error('Failed to send message. Please try emailing me directly at iftey10@gmail.com');
     } finally {
       setIsSubmitting(false);
     }
@@ -100,7 +115,7 @@ export default function ContactSection() {
       label: 'Phone Number',
       value: '01318664769',
       href: 'tel:+8801318664769',
-      color: 'text-green-600 dark:text-green-400'
+      color: 'text-purple-600 dark:text-orange-400'
     },
     {
       icon: 'whatsapp',
@@ -178,7 +193,7 @@ export default function ContactSection() {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Contact Form */}
-            <Card className="p-8 bg-card border border-border">
+            <Card className=" p-8 bg-card border border-border">
               <h3 className="text-2xl font-bold text-foreground mb-6">Send Me a Message</h3>
               <form onSubmit={handleSubmit} className="space-y-6 contact-form">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
